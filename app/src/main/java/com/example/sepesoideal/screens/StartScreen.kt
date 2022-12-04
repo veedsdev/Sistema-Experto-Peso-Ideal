@@ -20,7 +20,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 
-var person = Person(0,0,"")
+var person = Person(0, 0, "")
+
 @Composable
 fun StartScreen(
     navController: NavHostController
@@ -95,9 +96,8 @@ fun StartScreen(
             if (llenarDatos) {
                 datosRecibidos = LlenarDatos()
             }
-            if(datosRecibidos)
-            {
-                Condiciones()
+            if (datosRecibidos) {
+                Condicion()
             }
 
 
@@ -105,14 +105,15 @@ fun StartScreen(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class, ExperimentalMaterialApi::class,
+@OptIn(
+    ExperimentalAnimationApi::class, ExperimentalPagerApi::class, ExperimentalMaterialApi::class,
     ExperimentalMaterialApi::class
 )
 @Composable
-fun Condiciones(){
-    Row(modifier=Modifier.padding(top=20.dp)) {
+fun Condicion() {
+    Row(modifier = Modifier.padding(top = 20.dp)) {
         Text(
-            text = "Condiciones",
+            text = "Condición: ",
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(4.dp),
@@ -120,11 +121,78 @@ fun Condiciones(){
         )
     }
 
-    if(person.sexo=="M"){
+    if (person.sexo == "Femenino") {
 
-        if (person.estatura>=144 && person.estatura<=150 && person.peso>=49 && person.peso<=56){
+        if (person.estatura >= 144 && person.estatura <= 150 && person.peso >= 49 && person.peso <= 56) {
+            PesoIdeal()
             Mantenerse()
         }
+
+        else if (person.estatura >= 144 && person.estatura <= 150 && person.peso > 56) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 150 && person.estatura <= 155 && person.peso >= 51 && person.peso <= 59) {
+            PesoIdeal()
+            Mantenerse()
+        }
+
+        else if (person.estatura >= 150 && person.estatura <= 155 && person.peso > 59) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 156 && person.estatura <= 160 && person.peso >= 54 && person.peso <= 61) {
+            PesoIdeal()
+            Mantenerse()
+        }
+
+        else if (person.estatura >= 156 && person.estatura <= 160 && person.peso >61) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >= 56 && person.peso <= 64) {
+            PesoIdeal()
+            Mantenerse()
+        }
+
+        else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >64) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >= 59 && person.peso <= 67) {
+            PesoIdeal()
+            Mantenerse()
+        }
+
+        else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >67) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >= 62 && person.peso <= 70) {
+            PesoIdeal()
+            Mantenerse()
+        }
+        else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >70) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+        else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >= 60 && person.peso <= 72) {
+            PesoIdeal()
+            Mantenerse()
+        }
+
+        else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >72) {
+            SobrePeso()
+            BajarDePeso()
+        }
+
+
     }
 
 }
@@ -132,7 +200,33 @@ fun Condiciones(){
 
 
 @Composable
-fun Mantenerse(){
+fun SobrePeso(){
+    Row() {
+        Text(
+            text = "Sobre Peso",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+}
+
+@Composable
+fun PesoIdeal(){
+    Row() {
+        Text(
+            text = "Peso Ideal",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+}
+
+@Composable
+fun Mantenerse() {
     Row() {
         Text(
             text = "Rutina Mantenerse",
@@ -144,12 +238,26 @@ fun Mantenerse(){
     }
 }
 
+@Composable
+fun BajarDePeso() {
+    Row() {
+        Text(
+            text = "Rutina Bajar de peso",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+}
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class, ExperimentalMaterialApi::class,
+
+@OptIn(
+    ExperimentalAnimationApi::class, ExperimentalPagerApi::class, ExperimentalMaterialApi::class,
     ExperimentalMaterialApi::class
 )
 @Composable
-fun LlenarDatos() : Boolean {
+fun LlenarDatos(): Boolean {
 
 
     var sexo by remember { mutableStateOf("") }
@@ -177,7 +285,7 @@ fun LlenarDatos() : Boolean {
         Row {
             Column {
                 Button({
-                    sexo = "H"
+                    sexo = "Masculino"
                     showSexo = false
                     showEstatura = true
                 }) {
@@ -186,7 +294,7 @@ fun LlenarDatos() : Boolean {
             }
             Column {
                 Button({
-                    sexo = "M"
+                    sexo = "Femenino"
                     showSexo = false
                     showEstatura = true
                 }) {
@@ -214,14 +322,14 @@ fun LlenarDatos() : Boolean {
 
 
                 var options = ArrayList<Int>()
-                if(sexo == "H"){
-                    for(i in 155..190){
+                if (sexo == "Masculino") {
+                    for (i in 155..190) {
                         options.add(i)
                     }
                 }
 
-                if(sexo == "M"){
-                    for(i in 140..180){
+                if (sexo == "Femenino") {
+                    for (i in 144..180) {
                         options.add(i)
                     }
                 }
@@ -271,18 +379,17 @@ fun LlenarDatos() : Boolean {
                 }
 
 
-
             }
         }
-        Row(){
+        Row() {
             Button({
                 person.sexo = sexo
                 person.peso = 0
                 Log.d("estatura", estatura.toString())
                 person.estatura = estatura
                 Log.d("PERSONA", person.toString())
-                showEstatura=false
-                showPeso=true
+                showEstatura = false
+                showPeso = true
             }) {
                 Text(text = "Aceptar")
             }
@@ -309,14 +416,14 @@ fun LlenarDatos() : Boolean {
 
 
                 var optionsPeso = ArrayList<Int>()
-                if(sexo == "M"){
-                    for(i in 49..72){
+                if (sexo == "Femenino") {
+                    for (i in 49..72) {
                         optionsPeso.add(i)
                     }
                 }
 
-                if(sexo == "H"){
-                    for(i in 50..78){
+                if (sexo == "Masculino") {
+                    for (i in 50..78) {
                         optionsPeso.add(i)
                     }
                 }
@@ -366,17 +473,16 @@ fun LlenarDatos() : Boolean {
                 }
 
 
-
             }
         }
-        Row(){
+        Row() {
             Button({
                 person.sexo = sexo
                 person.peso = peso
                 person.estatura = estatura
                 Log.d("PERSONA", person.toString())
-                showData=true
-                showPeso=false
+                showData = true
+                showPeso = false
                 datosEnviados = true
             }) {
                 Text(text = "Aceptar")
