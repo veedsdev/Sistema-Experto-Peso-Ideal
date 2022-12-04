@@ -5,24 +5,46 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import com.example.sepesoideal.screens.InfoScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 import com.example.sepesoideal.screens.StartScreen
+import com.example.sepesoideal.screens.SystemScreen
+import com.example.sepesoideal.screens.rutinas.RutinTonificar
+import com.example.sepesoideal.screens.rutinas.RutinaBajar
+import com.example.sepesoideal.screens.rutinas.RutinaMantenerse
 
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
 fun SeNavGraph(
-    navController: NavHostController,
-    startDestination: String,
+    navController: NavHostController
 ) {
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = Screen.System.route
     ) {
-        composable(route = Screen.Start.route) {
-            StartScreen(navController = navController)
+        composable(route = Screen.System.route) {
+            SystemScreen(navController = navController)
         }
+        composable(route = Screen.Info.route) {
+            InfoScreen(navController = navController)
+        }
+        composable(route = Screen.Main.route) {
+            StartScreen()
+        }
+
+
+        composable(route = Screen.Mantenerse.route) {
+            RutinaMantenerse(navController = navController)
+        }
+        composable(route = Screen.BajarDePeso.route) {
+            RutinaBajar(navController = navController)
+        }
+        composable(route = Screen.Tonificar.route) {
+            RutinTonificar(navController = navController)
+        }
+
     }
 }
