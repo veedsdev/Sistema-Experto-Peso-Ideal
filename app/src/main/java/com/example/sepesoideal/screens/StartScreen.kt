@@ -1,5 +1,6 @@
 package com.example.sepesoideal.screens
 
+
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sepesoideal.model.Person
+import com.example.sepesoideal.navigation.Screen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalAnimationApi
@@ -53,6 +55,10 @@ fun StartScreen(
             var llenarDatos by remember { mutableStateOf(false) }
             var datosRecibidos by remember { mutableStateOf(false) }
 
+            var mantenerse by remember { mutableStateOf(false) }
+            var tonificar by remember { mutableStateOf(false) }
+
+
             if (primerPregunta) {
                 Row {
                     Text(
@@ -75,7 +81,8 @@ fun StartScreen(
                     Column {
                         Button({
                             primerPregunta = false
-                            llenarDatos = true
+                            mantenerse = true
+                            //llenarDatos = true
                         }) {
                             Text(text = "Mantenerse")
                         }
@@ -83,7 +90,8 @@ fun StartScreen(
                     Column {
                         Button({
                             primerPregunta = false
-                            llenarDatos = true
+                            tonificar = true
+                            //llenarDatos = true
                         }) {
                             Text(text = "Tonificar")
                         }
@@ -93,11 +101,18 @@ fun StartScreen(
 
 
 
+            if (tonificar) {
+                SacarMusculos(navController)
+            }
+            if (mantenerse) {
+                Mantenerse(navController)
+            }
+
             if (llenarDatos) {
                 datosRecibidos = LlenarDatos()
             }
             if (datosRecibidos) {
-                Condicion()
+                Condicion(navController)
             }
 
 
@@ -106,11 +121,10 @@ fun StartScreen(
 }
 
 @OptIn(
-    ExperimentalAnimationApi::class, ExperimentalPagerApi::class, ExperimentalMaterialApi::class,
-    ExperimentalMaterialApi::class
+    ExperimentalAnimationApi::class, ExperimentalPagerApi::class,
 )
 @Composable
-fun Condicion() {
+fun Condicion(navController: NavHostController) {
     Row(modifier = Modifier.padding(top = 20.dp)) {
         Text(
             text = "Condición: ",
@@ -124,83 +138,78 @@ fun Condicion() {
     if (person.sexo == "Femenino") {
 
         if (person.estatura >= 144 && person.estatura <= 150 && person.peso >= 49 && person.peso <= 56) {
-            PesoIdeal()
-            Mantenerse()
+            PesoIdeal(navController)
+        } else if (person.estatura >= 144 && person.estatura <= 150 && person.peso > 56) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 150 && person.estatura <= 155 && person.peso >= 51 && person.peso <= 59) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 150 && person.estatura <= 155 && person.peso > 59) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 156 && person.estatura <= 160 && person.peso >= 54 && person.peso <= 61) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 156 && person.estatura <= 160 && person.peso > 61) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >= 56 && person.peso <= 64) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 161 && person.estatura <= 165 && person.peso > 64) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >= 59 && person.peso <= 67) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 166 && person.estatura <= 170 && person.peso > 67) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >= 62 && person.peso <= 70) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 171 && person.estatura <= 175 && person.peso > 70) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >= 60 && person.peso <= 72) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 176 && person.estatura <= 180 && person.peso > 72) {
+            SobrePeso(navController)
         }
+    }
 
-        else if (person.estatura >= 144 && person.estatura <= 150 && person.peso > 56) {
-            SobrePeso()
-            BajarDePeso()
-        }
 
-        else if (person.estatura >= 150 && person.estatura <= 155 && person.peso >= 51 && person.peso <= 59) {
-            PesoIdeal()
-            Mantenerse()
-        }
+    if (person.sexo == "Masculino") {
 
-        else if (person.estatura >= 150 && person.estatura <= 155 && person.peso > 59) {
-            SobrePeso()
-            BajarDePeso()
-        }
-
-        else if (person.estatura >= 156 && person.estatura <= 160 && person.peso >= 54 && person.peso <= 61) {
-            PesoIdeal()
-            Mantenerse()
-        }
-
-        else if (person.estatura >= 156 && person.estatura <= 160 && person.peso >61) {
-            SobrePeso()
-            BajarDePeso()
-        }
-
-        else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >= 56 && person.peso <= 64) {
-            PesoIdeal()
-            Mantenerse()
-        }
-
-        else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >64) {
-            SobrePeso()
-            BajarDePeso()
-        }
-
-        else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >= 59 && person.peso <= 67) {
-            PesoIdeal()
-            Mantenerse()
-        }
-
-        else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >67) {
-            SobrePeso()
-            BajarDePeso()
-        }
-
-        else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >= 62 && person.peso <= 70) {
-            PesoIdeal()
-            Mantenerse()
-        }
-        else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >70) {
-            SobrePeso()
-            BajarDePeso()
-        }
-
-        else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >= 60 && person.peso <= 72) {
-            PesoIdeal()
-            Mantenerse()
-        }
-
-        else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >72) {
-            SobrePeso()
-            BajarDePeso()
+        if (person.estatura >= 155 && person.estatura <= 160 && person.peso >= 50 && person.peso <= 56) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 155 && person.estatura <= 160 && person.peso > 56) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >= 53 && person.peso <= 60) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 161 && person.estatura <= 165 && person.peso > 60) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 166 && person.estatura <= 170 && person.peso >= 56 && person.peso <= 63) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 166 && person.estatura <= 170 && person.peso > 63) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 171 && person.estatura <= 175 && person.peso >= 60 && person.peso <= 67) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 171 && person.estatura <= 175 && person.peso > 67) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 176 && person.estatura <= 180 && person.peso >= 63 && person.peso <= 71) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 176 && person.estatura <= 180 && person.peso > 71) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 181 && person.estatura <= 185 && person.peso >= 67 && person.peso <= 75) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 181 && person.estatura <= 185 && person.peso > 75) {
+            SobrePeso(navController)
+        } else if (person.estatura >= 186 && person.estatura <= 190 && person.peso >= 71 && person.peso <= 78) {
+            PesoIdeal(navController)
+        } else if (person.estatura >= 186 && person.estatura <= 190 && person.peso > 78) {
+            SobrePeso(navController)
         }
 
 
     }
 
+
 }
 
 
-
 @Composable
-fun SobrePeso(){
+fun SobrePeso(navController: NavHostController) {
     Row() {
         Text(
             text = "Sobre Peso",
@@ -210,10 +219,72 @@ fun SobrePeso(){
             color = Color.Black
         )
     }
+
+
+
+    Row {
+        Text(
+            text = "¿Desea Bajar Peso?",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+
+    var mantenerse by remember { mutableStateOf(true) }
+    var mostrarRutina by remember { mutableStateOf(false) }
+    if (mantenerse)
+        Row {
+            Column {
+                Button({
+                    mantenerse = false
+                    RestartApp(navController)
+                }) {
+                    Text(text = "Salir")
+                }
+            }
+            Column {
+                Button({
+                    mantenerse = false
+                    mostrarRutina = true
+                }) {
+                    Text(text = "Bajar Peso")
+                }
+            }
+        }
+    if (mostrarRutina) {
+        BajarDePeso(navController)
+    }
+
+
 }
 
 @Composable
-fun PesoIdeal(){
+fun BajarDePeso(navController: NavHostController) {
+    Row() {
+        Text(
+            text = "Rutina Bajar de peso",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+    Row {
+        Column {
+            Button({
+                RestartApp(navController)
+            }) {
+                Text(text = "Salir")
+            }
+        }
+    }
+}
+
+
+@Composable
+fun PesoIdeal(navController: NavHostController) {
     Row() {
         Text(
             text = "Peso Ideal",
@@ -223,10 +294,88 @@ fun PesoIdeal(){
             color = Color.Black
         )
     }
+
+    Row() {
+        Text(
+            text = "¿Qué desea realizar?",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+
+    var mantenerse by remember { mutableStateOf(true) }
+    var mantenerseRutina by remember { mutableStateOf(false) }
+    var musculosRutina by remember { mutableStateOf(false) }
+    if (mantenerse)
+        Row {
+            Column {
+                Button({
+                    mantenerse = false
+                    RestartApp(navController)
+                }) {
+                    Text(text = "Salir")
+                }
+            }
+            Column {
+                Button({
+                    mantenerse = false
+                    mantenerseRutina = true
+                }) {
+                    Text(text = "Mantenerse")
+                }
+            }
+            Column {
+                Button({
+                    mantenerse = false
+                    musculosRutina = true
+                }) {
+                    Text(text = "Sacar músculos")
+                }
+            }
+        }
+    if (mantenerseRutina) {
+        Mantenerse(navController)
+    }
+    if (musculosRutina) {
+        SacarMusculos(navController)
+    }
+}
+
+fun RestartApp(navController: NavHostController) {
+    navController.navigate(Screen.Start.route)
+    {
+        //popUpTo(navController.graph.findStartDestination().id)
+        //launchSingleTop = true
+    }
+}
+
+
+@Composable
+fun SacarMusculos(navController: NavHostController) {
+    Row() {
+        Text(
+            text = "Rutina Sacar Músculos",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(4.dp),
+            color = Color.Black
+        )
+    }
+    Row {
+        Column {
+            Button({
+                RestartApp(navController)
+            }) {
+                Text(text = "Salir")
+            }
+        }
+    }
 }
 
 @Composable
-fun Mantenerse() {
+fun Mantenerse(navController: NavHostController) {
     Row() {
         Text(
             text = "Rutina Mantenerse",
@@ -236,18 +385,14 @@ fun Mantenerse() {
             color = Color.Black
         )
     }
-}
-
-@Composable
-fun BajarDePeso() {
-    Row() {
-        Text(
-            text = "Rutina Bajar de peso",
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(4.dp),
-            color = Color.Black
-        )
+    Row {
+        Column {
+            Button({
+                RestartApp(navController)
+            }) {
+                Text(text = "Salir")
+            }
+        }
     }
 }
 
@@ -258,6 +403,7 @@ fun BajarDePeso() {
 )
 @Composable
 fun LlenarDatos(): Boolean {
+
 
 
     var sexo by remember { mutableStateOf("") }
@@ -306,6 +452,7 @@ fun LlenarDatos(): Boolean {
 
 
     if (showEstatura) {
+        val options = llenarComboEstatura(sexo)
         Row() {
             Text(
                 text = "Seleccione estatura",
@@ -321,22 +468,10 @@ fun LlenarDatos(): Boolean {
             Column {
 
 
-                var options = ArrayList<Int>()
-                if (sexo == "Masculino") {
-                    for (i in 155..190) {
-                        options.add(i)
-                    }
-                }
-
-                if (sexo == "Femenino") {
-                    for (i in 144..180) {
-                        options.add(i)
-                    }
-                }
-
-
-                var expanded by remember { mutableStateOf(false) }
                 var selectedOptionText by remember { mutableStateOf(options[0]) }
+                var expanded by remember { mutableStateOf(false) }
+
+
 
                 ExposedDropdownMenuBox(
                     expanded = expanded,
@@ -415,15 +550,15 @@ fun LlenarDatos(): Boolean {
             Column {
 
 
-                var optionsPeso = ArrayList<Int>()
+                val optionsPeso = ArrayList<Int>()
                 if (sexo == "Femenino") {
-                    for (i in 49..72) {
+                    for (i in 49..100) {
                         optionsPeso.add(i)
                     }
                 }
 
                 if (sexo == "Masculino") {
-                    for (i in 50..78) {
+                    for (i in 50..100) {
                         optionsPeso.add(i)
                     }
                 }
@@ -443,7 +578,7 @@ fun LlenarDatos(): Boolean {
                         readOnly = true,
                         value = selectedOptionTextPeso.toString(),
                         onValueChange = { },
-                        label = { Text("Estatura") },
+                        label = { Text("Peso") },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(
                                 expanded = expandedPeso
@@ -521,9 +656,23 @@ fun LlenarDatos(): Boolean {
         }
     }
 
-
-
     return datosEnviados
+}
+
+fun llenarComboEstatura(sexo:String):ArrayList<Int>{
+    val options = ArrayList<Int>()
+    if (sexo == "Masculino") {
+        for (i in 155..190) {
+            options.add(i)
+        }
+    }
+
+    if (sexo == "Femenino") {
+        for (i in 144..180) {
+            options.add(i)
+        }
+    }
+    return options
 }
 
 
