@@ -97,7 +97,7 @@ fun StartScreen(
                 datosRecibidos = LlenarDatos()
             }
             if (datosRecibidos) {
-                Condiciones()
+                Condicion()
             }
 
 
@@ -110,10 +110,10 @@ fun StartScreen(
     ExperimentalMaterialApi::class
 )
 @Composable
-fun Condiciones() {
+fun Condicion() {
     Row(modifier = Modifier.padding(top = 20.dp)) {
         Text(
-            text = "Condiciones",
+            text = "Condición: ",
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(4.dp),
