@@ -2,11 +2,13 @@ package com.example.sepesoideal.screens
 
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -15,6 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sepesoideal.navigation.Screen
 import com.example.sepesoideal.navigation.SeNavGraph
+import com.example.sepesoideal.util.supportWideScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 
 @ExperimentalAnimationApi
@@ -34,11 +37,12 @@ fun StartScreen(
                 },
             )
         },
-        bottomBar = {BottomBar(navController)}
-    ) {
+        bottomBar = { BottomBar(navController) },
 
-        SeNavGraph(navController = navController)
-
+        ) {
+        Box(modifier = Modifier.supportWideScreen()) {
+            SeNavGraph(navController = navController)
+        }
     }
 }
 
@@ -50,17 +54,16 @@ fun BottomBar(navController: NavHostController) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Home,"")
+            Icon(imageVector = Icons.Default.Home, "")
         },
             label = { Text(text = "Inicio") },
             selected = currentDestination?.hierarchy?.any {
                 it.route == Screen.System.route
-            } == true
-            ,
+            } == true,
 
             onClick = {
                 selectedIndex.value = 0
-                navController.navigate( Screen.System.route) {
+                navController.navigate(Screen.System.route) {
                     popUpTo(navController.graph.findStartDestination().id)
                     launchSingleTop = true
                 }
@@ -68,7 +71,7 @@ fun BottomBar(navController: NavHostController) {
 
 
         BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Info,"")
+            Icon(imageVector = Icons.Default.Info, "")
         },
             label = { Text(text = "Info") },
             selected = currentDestination?.hierarchy?.any {
@@ -76,7 +79,7 @@ fun BottomBar(navController: NavHostController) {
             } == true,
             onClick = {
                 selectedIndex.value = 1
-                navController.navigate( Screen.Info.route) {
+                navController.navigate(Screen.Info.route) {
                     popUpTo(navController.graph.findStartDestination().id)
                     launchSingleTop = true
                 }

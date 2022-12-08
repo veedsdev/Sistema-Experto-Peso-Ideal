@@ -167,9 +167,9 @@ fun Condicion(navController: NavHostController) {
 
     if (person.sexo == "Masculino") {
 
-        if (person.estatura >= 155 && person.estatura <= 160 && person.peso >= 50 && person.peso <= 56) {
+        if (person.estatura >= 144 && person.estatura <= 160 && person.peso >= 49 && person.peso <= 56) {
             PesoIdeal(navController)
-        } else if (person.estatura >= 155 && person.estatura <= 160 && person.peso > 56) {
+        } else if (person.estatura >= 144 && person.estatura <= 160 && person.peso > 56) {
             SobrePeso(navController)
         } else if (person.estatura >= 161 && person.estatura <= 165 && person.peso >= 53 && person.peso <= 60) {
             PesoIdeal(navController)
@@ -403,10 +403,10 @@ fun Mantenerse(navController: NavHostController) {
 @Composable
 fun LlenarDatos(): Boolean {
 
-
+    val options = listOf(144, 145, 146, 147, 148,149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168,169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188,189, 190)
     var sexo by remember { mutableStateOf("") }
-    var estatura by remember { mutableStateOf(0) }
-    var peso by remember { mutableStateOf(0) }
+    var estatura by remember { mutableStateOf(144) }
+    var peso by remember { mutableStateOf(49) }
 
     var showSexo by remember { mutableStateOf(true) }
     var showEstatura by remember { mutableStateOf(false) }
@@ -450,7 +450,7 @@ fun LlenarDatos(): Boolean {
 
 
     if (showEstatura) {
-        val options = llenarComboEstatura(sexo)
+
         Row() {
             Text(
                 text = "Seleccione estatura",
@@ -496,6 +496,7 @@ fun LlenarDatos(): Boolean {
                             expanded = false
                         }
                     ) {
+
 
                         options.forEach { selectionOption ->
                             DropdownMenuItem(
@@ -556,7 +557,7 @@ fun LlenarDatos(): Boolean {
                 }
 
                 if (sexo == "Masculino") {
-                    for (i in 50..100) {
+                    for (i in 49..100) {
                         optionsPeso.add(i)
                     }
                 }

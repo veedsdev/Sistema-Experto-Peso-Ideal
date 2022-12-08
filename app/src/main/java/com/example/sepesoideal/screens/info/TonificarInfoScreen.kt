@@ -1,4 +1,4 @@
-package com.example.sepesoideal.screens.rutinas
+package com.example.sepesoideal.screens.info
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -15,26 +15,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sepesoideal.R
 
-
-
-data class Tonificar(var parteCuerpo:String, var serie: Int, var repeticiones: Int)
-
-fun setEjercicioTonificar() : Tonificar{
-    val ejercicios = listOf(
-        Tonificar("Pecho y Triceps",8,15),
-        Tonificar("Espalda y Biceps",8,15),
-        Tonificar("Antebrazo y Hombros", 8,15),
-        Tonificar("Piernas", 8,15),
-    )
-    val rnd = (0..ejercicios.size - 1).random()
-    return ejercicios.get(rnd)
-}
-
-
-
 @Composable
-fun RutinTonificar(navController: NavHostController) {
-    var ejercicio = setEjercicioTonificar()
+fun TonificarInfoScreen(navController: NavHostController) {
     val scrollState = rememberScrollState()
     Box(
         Modifier
@@ -61,18 +43,6 @@ fun RutinTonificar(navController: NavHostController) {
                     painter = painterResource(id = R.drawable.tonificar),
                     contentDescription = null,
                 )
-            }
-            if(true){
-                Row(modifier = Modifier.padding(start = 12.dp, top = 20.dp))
-                {
-                    Text(text= "Ejercicio a hacer: ",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp,)
-                }
-                Row (modifier = Modifier.padding(start = 12.dp)){
-                    Text (text = "Parte del cuerpo: ${ejercicio.parteCuerpo} \n" +
-                            "Serie: ${ejercicio.serie}\nRepeticiones:${ejercicio.repeticiones}")
-                }
             }
 
         }

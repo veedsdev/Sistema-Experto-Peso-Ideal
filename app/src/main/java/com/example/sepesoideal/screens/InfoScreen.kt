@@ -45,30 +45,30 @@ fun InfoScreen(
                     modifier = Modifier
                         .padding(top = 20.dp, bottom = 8.dp)
                         .clickable(onClick = {
-                            navController.navigate(Screen.Mantenerse.route)
+                            navController.navigate(Screen.MantenerseInfo.route)
                         })
                         .fillMaxWidth()
                 )
 
-                //MANTENERSE
+                //BAJAR PESO
                 OptionMenu(
                     titleOption = "Rutinas Bajar Peso",
                     descriptionOption = "Ejercicios Sobre Peso - Bajar Peso",
                     modifier = Modifier
                         .padding(top = 20.dp, bottom = 8.dp)
                         .clickable(onClick = {
-                            navController.navigate(Screen.BajarDePeso.route)
+                            navController.navigate(Screen.BajarDePesoInfo  .route)
                         })
                         .fillMaxWidth()
                 )
-                //MANTENERSE
+                //TONIFICAR
                 OptionMenu(
                     titleOption = "Rutinas Tonificar",
                     descriptionOption = "Ejercicios Peso Ideal - Sacar Músculo",
                     modifier = Modifier
                         .padding(top = 20.dp, bottom = 8.dp)
                         .clickable(onClick = {
-                            navController.navigate(Screen.Tonificar.route)
+                            navController.navigate(Screen.TonificarInfo.route)
                         })
                         .fillMaxWidth()
                 )

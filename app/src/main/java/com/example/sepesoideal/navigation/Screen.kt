@@ -10,4 +10,8 @@ sealed class Screen(val route : String) {
     object BajarDePeso : Screen(route = "bajar_screen")
     object Tonificar : Screen(route = "tonificar_screen")
 
+    object MantenerseInfo : Screen(route = "mantenerseInfo_screen")
+    object BajarDePesoInfo : Screen(route = "bajarInfo_screen")
+    object TonificarInfo : Screen(route = "tonificarInfo_screen")
+
 }
